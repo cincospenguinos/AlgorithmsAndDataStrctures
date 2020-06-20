@@ -60,7 +60,7 @@ public class BlendedStackTest {
     }
 
     @Test
-    public void clear_works() {
+    public void test_clearWorks() {
         BlendedStack<String> stack = new BlendedStack<>();
         stack.push("hey");
         stack.push("hey");
@@ -68,5 +68,35 @@ public class BlendedStackTest {
         stack.clear();
 
         assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    public void time_idealArraySizeForAddingTons() {
+        int[] sizes = { 2, 4, 8, 16, 32, 64, 128, 256, 512 };
+
+        for (int size : sizes) System.out.print(size + "\t");
+        System.out.println("");
+
+        StringBuilder builder = new StringBuilder();
+        for (int size : sizes) {
+            BlendedStack<Integer> stack = new BlendedStack<>(size);
+
+            long totalTime = 0;
+            for (int trial = 1; trial <= 15; trial++) {
+                long start = System.nanoTime();
+                for (int element = 0; element < 1000000; element++) {
+                    stack.push(element);
+                }
+                long end = System.nanoTime();
+
+                totalTime += (end - start);
+            }
+
+            builder.append((totalTime / 10) / 100000);
+            builder.append("ms");
+            builder.append('\t');
+        }
+
+        System.out.println(builder.toString().trim());
     }
 }

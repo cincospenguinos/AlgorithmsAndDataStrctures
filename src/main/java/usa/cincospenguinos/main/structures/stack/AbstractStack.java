@@ -1,30 +1,30 @@
 package usa.cincospenguinos.main.structures.stack;
 
-public abstract class AbstractStack<T> {
+public interface AbstractStack<T> {
     /**
      * Add item to the stack.
      * @param item - T item to add
      */
-    public abstract void push(T item);
+    public void push(T item);
 
     /**
      * Return item at top of stack, but do not remove it.
      *
      * @return T item on top of stack
      */
-    public abstract T peek();
+    public T peek();
 
     /**
      * Remove T item from top of stack and return it.
      *
      * @return T item on top of stack
      */
-    public abstract T pop();
+    public T pop();
 
     /**
      * Remove all elements from stack
      */
-    public abstract void clear();
+    public void clear();
 
-    public abstract boolean isEmpty();
+    public boolean isEmpty();
 }

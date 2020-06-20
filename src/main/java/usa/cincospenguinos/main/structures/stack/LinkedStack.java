@@ -1,6 +1,6 @@
 package usa.cincospenguinos.main.structures.stack;
 
-public class LinkedStack<T> extends AbstractStack<T> {
+public class LinkedStack<T> implements AbstractStack<T> {
     private Node<T> head;
     private int size;
 

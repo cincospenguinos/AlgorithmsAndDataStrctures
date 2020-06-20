@@ -22,15 +22,15 @@ public class AbstractStackTest {
      * operation, but also when adding just a ton of elements.
      */
     @Test
-    public void time_addOperation() {
-        int trials = 30000;
+    public void time_addOperationGeneral() {
+        int trials = 1000;
 
         System.out.println("*** ADD OPERATION ***");
         System.out.println("Stack\tClear Between\tNo Clear Between");
         try {
             for (Class<? extends AbstractStack> classToEvaluate : CLASSES) {
                 StackEvaluation evaluation = new StackEvaluation(classToEvaluate);
-                String className = classToEvaluate.toString().replaceAll("class usa\\.cincospenguinos\\.main\\.structures\\.stack\\.", "");
+                String className = className(classToEvaluate);
 
                 long clearAfterEach = evaluation.evaluateAddOperation(trials, true);
                 long noClearAfterEach = evaluation.evaluateAddOperation(trials, false);
@@ -40,5 +40,45 @@ public class AbstractStackTest {
             e.printStackTrace();
             fail();
         }
+    }
+
+    /**
+     * Find the time to add the number of elements listed. Used to explore stack size benefits for each of
+     * the different stack types.
+     */
+    @Test
+    public void time_idealElementSizeForEach() {
+        int trials = 10;
+
+        System.out.println("*** ADDING ELEMENTS ***");
+        System.out.println("Stack\t100\t1000\t10000\t100000\t1000000\t10000000");
+
+        try {
+            int[] sizes = { 100, 1000, 10000, 100000, 1000000, 10000000 };
+
+            for (Class<? extends AbstractStack> classToEvaluate : CLASSES) {
+                StackEvaluation evaluation = new StackEvaluation(classToEvaluate);
+                String className = className(classToEvaluate);
+
+                StringBuilder builder = new StringBuilder();
+                builder.append(className);
+                builder.append('\t');
+
+                for (int size : sizes) {
+                    long time = evaluation.evaluateAddingElements(trials, size);
+                    builder.append(time);
+                    builder.append('\t');
+                }
+
+                System.out.println(builder.toString().trim());
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    private String className(Class<? extends AbstractStack> klass) {
+        return klass.toString().replaceAll("class usa\\.cincospenguinos\\.main\\.structures\\.stack\\.", "");
     }
 }

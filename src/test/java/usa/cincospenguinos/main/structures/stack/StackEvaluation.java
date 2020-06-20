@@ -33,6 +33,26 @@ class StackEvaluation<C extends AbstractStack<Integer>> {
         return totalIndividaulAddOpTime / totalTrials;
     }
 
+    long evaluateAddingElements(int totalTrials, int totalElements) throws NoSuchMethodException,
+            IllegalAccessException, InvocationTargetException, InstantiationException {
+        AbstractStack<Integer> evaluatedStack = evaluatedClass.getConstructor().newInstance();
+        long totalIndividaulAddOpTime = 0;
+
+        for (int trial = 1; trial <= totalTrials; trial++) {
+            Operation operation = () -> {
+                for (int i = 0; i < totalElements; i++) evaluatedStack.push(i);
+            };
+            Operation control = () -> { for(int i = 0; i < totalElements; i++); };
+
+            long individualOperationTime = timeOperation(operation, control) / totalElements;
+            totalIndividaulAddOpTime += individualOperationTime;
+
+            evaluatedStack.clear();
+        }
+
+        return totalIndividaulAddOpTime / totalTrials;
+    }
+
     private long timeOperation(Operation operation, Operation control) {
         long operationStart = System.nanoTime();
         operation.run();
