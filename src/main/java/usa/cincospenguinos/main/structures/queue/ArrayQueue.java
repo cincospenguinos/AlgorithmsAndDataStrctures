@@ -1,21 +1,24 @@
 package usa.cincospenguinos.main.structures.queue;
 
+import usa.cincospenguinos.main.structures.DynamicArray;
+
 public class ArrayQueue<T> implements Queue<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
-    private T[] backingStore;
+
+    private DynamicArray<T> backingStore;
     private int insertionIndex;
     private int removalIndex;
     private int size;
 
     public ArrayQueue() {
-        backingStore = (T[]) new Object[DEFAULT_STARTING_SIZE];
+        backingStore = new DynamicArray<>(DEFAULT_STARTING_SIZE);
         insertionIndex = 0;
         removalIndex = 0;
         size = 0;
     }
 
     public ArrayQueue(int startingArraySize) {
-        backingStore = (T[]) new Object[startingArraySize];
+        backingStore = new DynamicArray<>(startingArraySize);
         insertionIndex = 0;
         removalIndex = 0;
         size = 0;
@@ -24,34 +27,20 @@ public class ArrayQueue<T> implements Queue<T> {
     @Override
     public void enqueue(T item) {
         if (isFull()) {
-            grow();
+            backingStore.grow();
         }
 
         if (mustRolloverIndexes()) {
             insertionIndex = 0;
         }
 
-        backingStore[insertionIndex] = item;
+        backingStore.insertAt(item, insertionIndex);
         insertionIndex += 1;
         size += 1;
     }
 
     private boolean isFull() {
-        return size == backingStore.length;
-    }
-
-    private void grow() {
-        int newSize = backingStore.length * 2;
-        T[] newStore = (T[]) new Object[newSize];
-
-        for (int i = 0; i < backingStore.length; i++) {
-            int nextInQueue = (i + removalIndex) % backingStore.length;
-            newStore[i] = backingStore[nextInQueue];
-        }
-
-        insertionIndex = backingStore.length;
-        backingStore = newStore;
-        removalIndex = 0;
+        return size == backingStore.length();
     }
 
     @Override
@@ -64,7 +53,7 @@ public class ArrayQueue<T> implements Queue<T> {
             removalIndex = 0;
         }
 
-        T item = backingStore[removalIndex];
+        T item = backingStore.removeAt(removalIndex);
         removalIndex += 1;
         size -= 1;
 
@@ -72,7 +61,7 @@ public class ArrayQueue<T> implements Queue<T> {
     }
 
     private boolean mustRolloverIndexes() {
-        return removalIndex == backingStore.length;
+        return removalIndex == backingStore.length();
     }
 
     @Override
