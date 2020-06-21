@@ -1,6 +1,6 @@
 package usa.cincospenguinos.main.structures.stack;
 
-public class BlendedStack<T> implements AbstractStack<T> {
+public class BlendedStack<T> implements Stack<T> {
     private final int DEFAULT_MAX_ARRAY_SIZE = 64;
 
     private LinkedStack<ArrayStack<T>> backingStore;

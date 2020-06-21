@@ -10,8 +10,8 @@ import static org.junit.Assert.fail;
  * This test class exists for the sole purpose of testing the performance of implementations
  * of a stack.
  */
-public class AbstractStackTest {
-    private static final Class<? extends AbstractStack>[] CLASSES = new Class[]{
+public class StackTest {
+    private static final Class<? extends Stack>[] CLASSES = new Class[]{
             new ArrayStack<Integer>().getClass(),
             new LinkedStack<>().getClass(),
             new BlendedStack<>().getClass()
@@ -28,7 +28,7 @@ public class AbstractStackTest {
         System.out.println("*** ADD OPERATION ***");
         System.out.println("Stack\tClear Between\tNo Clear Between");
         try {
-            for (Class<? extends AbstractStack> classToEvaluate : CLASSES) {
+            for (Class<? extends Stack> classToEvaluate : CLASSES) {
                 StackEvaluation evaluation = new StackEvaluation(classToEvaluate);
                 String className = className(classToEvaluate);
 
@@ -56,7 +56,7 @@ public class AbstractStackTest {
         try {
             int[] sizes = { 100, 1000, 10000, 100000, 1000000, 10000000 };
 
-            for (Class<? extends AbstractStack> classToEvaluate : CLASSES) {
+            for (Class<? extends Stack> classToEvaluate : CLASSES) {
                 StackEvaluation evaluation = new StackEvaluation(classToEvaluate);
                 String className = className(classToEvaluate);
 
@@ -78,7 +78,7 @@ public class AbstractStackTest {
         }
     }
 
-    private String className(Class<? extends AbstractStack> klass) {
+    private String className(Class<? extends Stack> klass) {
         return klass.toString().replaceAll("class usa\\.cincospenguinos\\.main\\.structures\\.stack\\.", "");
     }
 }

@@ -1,6 +1,6 @@
 package usa.cincospenguinos.main.structures.stack;
 
-public class ArrayStack<T> implements AbstractStack<T> {
+public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
     private T[] backingStore;

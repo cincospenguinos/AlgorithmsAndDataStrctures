@@ -2,7 +2,7 @@ package usa.cincospenguinos.main.structures.stack;
 
 import java.lang.reflect.InvocationTargetException;
 
-class StackEvaluation<C extends AbstractStack<Integer>> {
+class StackEvaluation<C extends Stack<Integer>> {
     private Class<C> evaluatedClass;
 
     StackEvaluation(Class<C> classToEvaluate) {
@@ -11,7 +11,7 @@ class StackEvaluation<C extends AbstractStack<Integer>> {
 
     long evaluateAddOperation(int totalTrials, boolean clearStack) throws NoSuchMethodException, IllegalAccessException,
             InvocationTargetException, InstantiationException {
-        AbstractStack<Integer> evaluatedStack = evaluatedClass.getConstructor().newInstance();
+        Stack<Integer> evaluatedStack = evaluatedClass.getConstructor().newInstance();
         long totalIndividaulAddOpTime = 0;
 
         for (int trial = 1; trial <= totalTrials; trial++) {
@@ -35,7 +35,7 @@ class StackEvaluation<C extends AbstractStack<Integer>> {
 
     long evaluateAddingElements(int totalTrials, int totalElements) throws NoSuchMethodException,
             IllegalAccessException, InvocationTargetException, InstantiationException {
-        AbstractStack<Integer> evaluatedStack = evaluatedClass.getConstructor().newInstance();
+        Stack<Integer> evaluatedStack = evaluatedClass.getConstructor().newInstance();
         long totalIndividaulAddOpTime = 0;
 
         for (int trial = 1; trial <= totalTrials; trial++) {

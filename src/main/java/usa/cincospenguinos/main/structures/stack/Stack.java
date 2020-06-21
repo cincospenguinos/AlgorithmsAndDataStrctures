@@ -1,6 +1,6 @@
 package usa.cincospenguinos.main.structures.stack;
 
-public interface AbstractStack<T> {
+public interface Stack<T> {
     /**
      * Add item to the stack.
      * @param item - T item to add
