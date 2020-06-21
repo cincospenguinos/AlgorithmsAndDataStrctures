@@ -27,6 +27,10 @@ public class DynamicArray<T> {
         backingArray[index] = item;
     }
 
+    public T getAt(int index) {
+        return backingArray[index];
+    }
+
     /**
      * Removes the element at the index provided, returning what was in that spot in the array.
      *

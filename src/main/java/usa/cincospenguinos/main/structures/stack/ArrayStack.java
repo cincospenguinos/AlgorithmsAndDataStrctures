@@ -1,27 +1,29 @@
 package usa.cincospenguinos.main.structures.stack;
 
+import usa.cincospenguinos.main.structures.DynamicArray;
+
 public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
-    private T[] backingStore;
+    private DynamicArray<T> backingArray;
     private int currentIndex;
 
     public ArrayStack() {
-        backingStore = (T[]) new Object[DEFAULT_STARTING_SIZE];
+        backingArray = new DynamicArray<>(DEFAULT_STARTING_SIZE);
         currentIndex = 0;
     }
 
     public ArrayStack(int size) {
-        backingStore = (T[]) new Object[size];
+        backingArray = new DynamicArray<>(size);
         currentIndex = 0;
     }
 
     public void push(T item) {
         if (isFull()) {
-            growStore();
+            backingArray.grow();
         }
 
-        backingStore[currentIndex] = (T) item;
+        backingArray.insertAt(item, currentIndex);
         currentIndex += 1;
     }
 
@@ -31,22 +33,11 @@ public class ArrayStack<T> implements Stack<T> {
             return null;
         }
 
-        return backingStore[currentIndex - 1];
+        return backingArray.getAt(currentIndex - 1);
     }
 
     private boolean isFull() {
-        return currentIndex == backingStore.length;
-    }
-
-    private void growStore() {
-        int newSize = (backingStore.length * 2) + 1;
-        T[] newStore = (T[]) new Object[newSize];
-
-        for (int i = 0; i < backingStore.length; i++) {
-            newStore[i] = backingStore[i];
-        }
-
-        backingStore = newStore;
+        return currentIndex == backingArray.length();
     }
 
     public T pop() {
@@ -55,12 +46,13 @@ public class ArrayStack<T> implements Stack<T> {
         }
 
         currentIndex -= 1;
-        return backingStore[currentIndex];
+        return backingArray.removeAt(currentIndex);
     }
 
     @Override
     public void clear() {
         currentIndex = 0;
+        backingArray = new DynamicArray<>(backingArray.length());
     }
 
     public boolean isEmpty() {

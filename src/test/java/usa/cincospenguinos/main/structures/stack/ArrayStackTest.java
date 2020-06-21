@@ -16,8 +16,9 @@ public class ArrayStackTest {
 
     @Test
     public void test_pushAutomaticallyExtendsArray() {
-        ArrayStack<Integer> stack = new ArrayStack<Integer>(0);
+        ArrayStack<Integer> stack = new ArrayStack<Integer>(1);
         stack.push(1);
+        stack.push(2);
         assertFalse(stack.isEmpty());
     }
 
