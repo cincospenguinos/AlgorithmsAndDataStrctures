@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ArrayQueueTest {
+public class DynamicArrayQueueTest {
     @Test
     public void test_enqueueUpdatesSize() {
         ArrayQueue<String> queue = new ArrayQueue<>();

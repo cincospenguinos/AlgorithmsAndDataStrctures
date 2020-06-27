@@ -1,19 +1,19 @@
-package usa.cincospenguinos.main.structures;
+package usa.cincospenguinos.main.structures.arrays;
 
 /**
  * Abstraction of a self-growing array. For use to ensure DRYing up pieces of this codebase, but
  * exposed as a valid data structure as well. Intended to be as close to an array as possible.
  */
-public class DynamicArray<T> {
+public class SimpleDynamicArray<T> implements DynamicArray<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
     private T[] backingArray;
 
-    public DynamicArray() {
+    public SimpleDynamicArray() {
         backingArray = (T[]) new Object[DEFAULT_STARTING_SIZE];
     }
 
-    public DynamicArray(int startingSize) {
+    public SimpleDynamicArray(int startingSize) {
         backingArray = (T[]) new Object[startingSize];
     }
 
@@ -23,7 +23,7 @@ public class DynamicArray<T> {
      * @param item - T item
      * @param index - index to insert item into
      */
-    public void insert(T item, int index) {
+    public void set(T item, int index) {
         backingArray[index] = item;
     }
 

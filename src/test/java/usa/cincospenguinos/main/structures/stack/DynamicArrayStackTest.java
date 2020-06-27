@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ArrayStackTest {
+public class DynamicArrayStackTest {
 
     @Test
     public void test_pushUpdatesSize() {

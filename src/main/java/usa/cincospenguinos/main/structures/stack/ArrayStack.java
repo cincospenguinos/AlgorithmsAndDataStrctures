@@ -1,20 +1,20 @@
 package usa.cincospenguinos.main.structures.stack;
 
-import usa.cincospenguinos.main.structures.DynamicArray;
+import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
 
 public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
-    private DynamicArray<T> backingArray;
+    private SimpleDynamicArray<T> backingArray;
     private int currentIndex;
 
     public ArrayStack() {
-        backingArray = new DynamicArray<>(DEFAULT_STARTING_SIZE);
+        backingArray = new SimpleDynamicArray<>(DEFAULT_STARTING_SIZE);
         currentIndex = 0;
     }
 
     public ArrayStack(int size) {
-        backingArray = new DynamicArray<>(size);
+        backingArray = new SimpleDynamicArray<>(size);
         currentIndex = 0;
     }
 
@@ -23,7 +23,7 @@ public class ArrayStack<T> implements Stack<T> {
             backingArray.grow();
         }
 
-        backingArray.insert(item, currentIndex);
+        backingArray.set(item, currentIndex);
         currentIndex += 1;
     }
 
@@ -52,7 +52,7 @@ public class ArrayStack<T> implements Stack<T> {
     @Override
     public void clear() {
         currentIndex = 0;
-        backingArray = new DynamicArray<>(backingArray.length());
+        backingArray = new SimpleDynamicArray<>(backingArray.length());
     }
 
     public boolean isEmpty() {

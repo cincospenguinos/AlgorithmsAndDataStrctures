@@ -1,24 +1,24 @@
 package usa.cincospenguinos.main.structures.queue;
 
-import usa.cincospenguinos.main.structures.DynamicArray;
+import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
 
 public class ArrayQueue<T> implements Queue<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
-    private DynamicArray<T> backingStore;
+    private SimpleDynamicArray<T> backingStore;
     private int insertionIndex;
     private int removalIndex;
     private int size;
 
     public ArrayQueue() {
-        backingStore = new DynamicArray<>(DEFAULT_STARTING_SIZE);
+        backingStore = new SimpleDynamicArray<>(DEFAULT_STARTING_SIZE);
         insertionIndex = 0;
         removalIndex = 0;
         size = 0;
     }
 
     public ArrayQueue(int startingArraySize) {
-        backingStore = new DynamicArray<>(startingArraySize);
+        backingStore = new SimpleDynamicArray<>(startingArraySize);
         insertionIndex = 0;
         removalIndex = 0;
         size = 0;
@@ -34,7 +34,7 @@ public class ArrayQueue<T> implements Queue<T> {
             insertionIndex = 0;
         }
 
-        backingStore.insert(item, insertionIndex);
+        backingStore.set(item, insertionIndex);
         insertionIndex += 1;
         size += 1;
     }
