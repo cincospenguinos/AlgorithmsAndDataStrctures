@@ -48,7 +48,7 @@ public class DynamicArray<T> {
     }
 
     /**
-     * Doubles the array.
+     * Doubles the array's size.
      */
     public void grow() {
         int newSize = backingArray.length * 2;
