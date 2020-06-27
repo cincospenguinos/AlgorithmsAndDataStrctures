@@ -1,11 +1,12 @@
 package usa.cincospenguinos.main.structures.stack;
 
+import usa.cincospenguinos.main.structures.arrays.DynamicArray;
 import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
 
 public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
-    private SimpleDynamicArray<T> backingArray;
+    private DynamicArray<T> backingArray;
     private int currentIndex;
 
     public ArrayStack() {

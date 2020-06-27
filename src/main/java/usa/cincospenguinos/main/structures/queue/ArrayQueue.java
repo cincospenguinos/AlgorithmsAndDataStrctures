@@ -1,11 +1,12 @@
 package usa.cincospenguinos.main.structures.queue;
 
+import usa.cincospenguinos.main.structures.arrays.DynamicArray;
 import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
 
 public class ArrayQueue<T> implements Queue<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
 
-    private SimpleDynamicArray<T> backingStore;
+    private DynamicArray<T> backingStore;
     private int insertionIndex;
     private int removalIndex;
     private int size;

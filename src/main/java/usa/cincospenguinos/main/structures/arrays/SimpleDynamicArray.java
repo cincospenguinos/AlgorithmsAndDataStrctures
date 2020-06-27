@@ -17,12 +17,6 @@ public class SimpleDynamicArray<T> implements DynamicArray<T> {
         backingArray = (T[]) new Object[startingSize];
     }
 
-    /**
-     * Insert the item at the index requested. Does not protect against ArrayIndexOutOfBound exceptions.
-     *
-     * @param item - T item
-     * @param index - index to insert item into
-     */
     public void set(T item, int index) {
         backingArray[index] = item;
     }
@@ -31,12 +25,6 @@ public class SimpleDynamicArray<T> implements DynamicArray<T> {
         return backingArray[index];
     }
 
-    /**
-     * Removes the element at the index provided, returning what was in that spot in the array.
-     *
-     * @param index to remove an element from
-     * @return T item at index
-     */
     public T remove(int index) {
         T item = backingArray[index];
         backingArray[index] = null;
@@ -47,9 +35,6 @@ public class SimpleDynamicArray<T> implements DynamicArray<T> {
         return backingArray.length;
     }
 
-    /**
-     * Doubles the array's size.
-     */
     public void grow() {
         int newSize = backingArray.length * 2;
         T[] newStore = (T[]) new Object[newSize];
