@@ -2,7 +2,7 @@ package usa.cincospenguinos.main.structures;
 
 /**
  * Abstraction of a self-growing array. For use to ensure DRYing up pieces of this codebase, but
- * exposed as a valid data structure as well.
+ * exposed as a valid data structure as well. Intended to be as close to an array as possible.
  */
 public class DynamicArray<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;
@@ -23,11 +23,11 @@ public class DynamicArray<T> {
      * @param item - T item
      * @param index - index to insert item into
      */
-    public void insertAt(T item, int index) {
+    public void insert(T item, int index) {
         backingArray[index] = item;
     }
 
-    public T getAt(int index) {
+    public T get(int index) {
         return backingArray[index];
     }
 
@@ -37,7 +37,7 @@ public class DynamicArray<T> {
      * @param index to remove an element from
      * @return T item at index
      */
-    public T removeAt(int index) {
+    public T remove(int index) {
         T item = backingArray[index];
         backingArray[index] = null;
         return item;

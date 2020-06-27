@@ -34,7 +34,7 @@ public class ArrayQueue<T> implements Queue<T> {
             insertionIndex = 0;
         }
 
-        backingStore.insertAt(item, insertionIndex);
+        backingStore.insert(item, insertionIndex);
         insertionIndex += 1;
         size += 1;
     }
@@ -53,7 +53,7 @@ public class ArrayQueue<T> implements Queue<T> {
             removalIndex = 0;
         }
 
-        T item = backingStore.removeAt(removalIndex);
+        T item = backingStore.remove(removalIndex);
         removalIndex += 1;
         size -= 1;
 

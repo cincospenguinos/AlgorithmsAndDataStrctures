@@ -23,7 +23,7 @@ public class ArrayStack<T> implements Stack<T> {
             backingArray.grow();
         }
 
-        backingArray.insertAt(item, currentIndex);
+        backingArray.insert(item, currentIndex);
         currentIndex += 1;
     }
 
@@ -33,7 +33,7 @@ public class ArrayStack<T> implements Stack<T> {
             return null;
         }
 
-        return backingArray.getAt(currentIndex - 1);
+        return backingArray.get(currentIndex - 1);
     }
 
     private boolean isFull() {
@@ -46,7 +46,7 @@ public class ArrayStack<T> implements Stack<T> {
         }
 
         currentIndex -= 1;
-        return backingArray.removeAt(currentIndex);
+        return backingArray.remove(currentIndex);
     }
 
     @Override
