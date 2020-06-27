@@ -1,4 +1,4 @@
-package usa.cincospenguinos.main.structures.arrays;
+package usa.cincospenguinos.main.structures.dynamic_array;
 
 public class DoubleBackedDynamicArray<T> implements DynamicArray<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;

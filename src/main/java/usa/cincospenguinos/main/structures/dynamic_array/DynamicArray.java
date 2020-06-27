@@ -1,4 +1,4 @@
-package usa.cincospenguinos.main.structures.arrays;
+package usa.cincospenguinos.main.structures.dynamic_array;
 
 public interface DynamicArray<T> {
     public T get(int index);

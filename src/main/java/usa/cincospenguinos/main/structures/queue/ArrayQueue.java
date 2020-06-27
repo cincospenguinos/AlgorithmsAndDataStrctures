@@ -1,7 +1,7 @@
 package usa.cincospenguinos.main.structures.queue;
 
-import usa.cincospenguinos.main.structures.arrays.DynamicArray;
-import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
+import usa.cincospenguinos.main.structures.dynamic_array.DynamicArray;
+import usa.cincospenguinos.main.structures.dynamic_array.SimpleDynamicArray;
 
 public class ArrayQueue<T> implements Queue<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;

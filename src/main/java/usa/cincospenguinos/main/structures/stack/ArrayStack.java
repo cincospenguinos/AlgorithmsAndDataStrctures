@@ -1,7 +1,7 @@
 package usa.cincospenguinos.main.structures.stack;
 
-import usa.cincospenguinos.main.structures.arrays.DynamicArray;
-import usa.cincospenguinos.main.structures.arrays.SimpleDynamicArray;
+import usa.cincospenguinos.main.structures.dynamic_array.DynamicArray;
+import usa.cincospenguinos.main.structures.dynamic_array.SimpleDynamicArray;
 
 public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_STARTING_SIZE = 8;

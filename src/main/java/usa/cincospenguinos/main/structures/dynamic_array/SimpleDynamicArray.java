@@ -1,4 +1,4 @@
-package usa.cincospenguinos.main.structures.arrays;
+package usa.cincospenguinos.main.structures.dynamic_array;
 
 /**
  * Abstraction of a self-growing array. For use to ensure DRYing up pieces of this codebase, but

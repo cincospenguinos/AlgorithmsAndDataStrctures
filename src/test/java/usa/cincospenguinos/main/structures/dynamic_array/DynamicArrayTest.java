@@ -1,4 +1,4 @@
-package usa.cincospenguinos.main.structures.arrays;
+package usa.cincospenguinos.main.structures.dynamic_array;
 
 import org.junit.Test;
 
