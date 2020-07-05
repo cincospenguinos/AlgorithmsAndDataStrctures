@@ -52,4 +52,17 @@ public class ContainedSearchTreeTest {
         assertNull(tree.find(2));
         assertNotNull(tree.find(1));
     }
+
+    @Test
+    public void delete_worksForRemovingInnerNodes() {
+        SearchTree<Integer, Integer> tree = new ContainedSearchTree<>();
+        tree.insert(3, 3);
+        tree.insert(2, 2);
+        tree.insert(5, 5);
+        tree.insert(4, 4);
+
+        tree.delete(5);
+        assertNull(tree.find(5));
+        assertNotNull(tree.find(4));
+    }
 }

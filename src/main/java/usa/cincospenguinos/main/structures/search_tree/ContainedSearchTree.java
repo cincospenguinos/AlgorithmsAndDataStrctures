@@ -64,30 +64,44 @@ public class ContainedSearchTree<K extends Comparable<K>, V> implements SearchTr
 
     @Override
     public void delete(K deletionKey) {
-        if (key.equals(deletionKey)) {
-            key = null;
-            value = null;
+        ContainedSearchTree<K, V> parent = null;
+        ContainedSearchTree<K, V> current = this;
+
+        while (current != null && !current.key.equals(deletionKey)) {
+            parent = current;
+
+            int comparison = current.key.compareTo(deletionKey);
+
+            if (comparison < 0) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        if (current == null) {
             return;
         }
 
-        ContainedSearchTree<K, V> parent = this;
-        ContainedSearchTree<K, V> current;
-        int comparisonValue = key.compareTo(deletionKey);
+        boolean isLeaf = current.isLeaf();
+        boolean isRoot = parent == null;
 
-        if (comparisonValue < 0) {
-            current = left;
-        } else {
-            current = right;
-        }
+        if (isLeaf) {
+            if (isRoot) {
+                current.key = null;
+                current.value = null;
+                return;
+            }
 
-        if (current.key.equals(deletionKey)) {
-            current.delete(deletionKey);
-
-            if (current == left) {
+            if (parent.left == current) {
                 parent.left = null;
             } else {
                 parent.right = null;
             }
         }
+    }
+
+    private boolean isLeaf() {
+        return left == null && right == null;
     }
 }
