@@ -23,10 +23,12 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
             return null;
         }
 
-        int comparison = key.compareTo(queryKey);
+        int comparison = queryKey.compareTo(key);
 
         if (comparison <= 0) {
             return left.find(queryKey);
+        } else if (right != null) {
+            return right.find(queryKey);
         }
 
         return null;
@@ -41,6 +43,14 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
         if (!isLeaf() && left == null) {
             left = new SimpleSearchTree<>(insertionKey, insertionValue);
             key = insertionKey;
+        }
+
+        int comparison = insertionKey.compareTo(key);
+
+        if (comparison <= 0) {
+            // TODO: Tackle this case
+        } else if (right == null) {
+            right = new SimpleSearchTree<>(insertionKey, insertionValue);
         }
     }
 

@@ -19,6 +19,15 @@ public class SimpleSearchTreeTest {
     }
 
     @Test
+    public void insert_worksForRightBranchItems() {
+        SearchTree<Integer, Integer> tree = new SimpleSearchTree<>();
+        tree.insert(1, 1);
+        tree.insert(2, 2);
+        assertEquals((Integer) 1, tree.find(1));
+        assertEquals((Integer) 2, tree.find(2));
+    }
+
+    @Test
     public void insert_worksForMultipleItems() {
         SearchTree<Integer, Integer> tree = new SimpleSearchTree<>();
 
