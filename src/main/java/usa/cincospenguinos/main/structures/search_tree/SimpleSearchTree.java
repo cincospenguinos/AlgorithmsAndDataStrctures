@@ -13,6 +13,10 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
         value = _value;
     }
 
+    private SimpleSearchTree(K _key) {
+        key = _key;
+    }
+
     @Override
     public V find(K queryKey) {
         if (isLeaf()) {
@@ -43,12 +47,32 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
         if (!isLeaf() && left == null) {
             left = new SimpleSearchTree<>(insertionKey, insertionValue);
             key = insertionKey;
+            return;
         }
 
         int comparison = insertionKey.compareTo(key);
 
         if (comparison <= 0) {
-            // TODO: Tackle this case
+            if (left.isLeaf() && !insertionKey.equals(left.key)) {
+                SimpleSearchTree<K, V> parent = new SimpleSearchTree<>(insertionKey);
+                SimpleSearchTree<K, V> leaf = new SimpleSearchTree<>(insertionKey, insertionValue);
+
+                int childComparison = insertionKey.compareTo(left.key);
+
+                if (childComparison < 0) {
+                    parent.left = leaf;
+                    parent.right = left;
+                } else {
+                    parent.left = left;
+                    parent.right = leaf;
+                }
+
+                left = parent;
+
+                return;
+            }
+
+            left.insert(insertionKey, insertionValue);
         } else if (right == null) {
             right = new SimpleSearchTree<>(insertionKey, insertionValue);
         }
