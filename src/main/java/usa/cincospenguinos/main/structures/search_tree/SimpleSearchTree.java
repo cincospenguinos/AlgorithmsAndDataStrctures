@@ -40,6 +40,11 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
         return value != null;
     }
 
+    private boolean comparesLeft(K otherKey) {
+        int comparison = otherKey.compareTo(key);
+        return comparison <= 0;
+    }
+
     @Override
     public void insert(K insertionKey, V insertionValue)  {
         if (!isLeaf()) {
@@ -51,32 +56,33 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
         }
 
         if (comparesLeft(insertionKey)) {
-            if (left.isLeaf() && !insertionKey.equals(left.key)) {
-                SimpleSearchTree<K, V> parent = new SimpleSearchTree<>(insertionKey);
-                SimpleSearchTree<K, V> leaf = new SimpleSearchTree<>(insertionKey, insertionValue);
-
-                if (left.comparesLeft(insertionKey)) {
-                    parent.left = leaf;
-                    parent.right = left;
-                } else {
-                    parent.left = left;
-                    parent.right = leaf;
-                }
-
-                left = parent;
-
-                return;
-            }
-
-            left.insert(insertionKey, insertionValue);
+            insertLeft(insertionKey, insertionValue);
         } else if (right == null) {
             right = new SimpleSearchTree<>(insertionKey, insertionValue);
         }
     }
 
-    private boolean comparesLeft(K otherKey) {
-        int comparison = otherKey.compareTo(key);
-        return comparison <= 0;
+    private void insertLeft(K insertionKey, V insertionValue) {
+        boolean insertOntoLeafNode = left.isLeaf() && !insertionKey.equals(left.key);
+
+        if (insertOntoLeafNode) {
+            SimpleSearchTree<K, V> parent = new SimpleSearchTree<>(insertionKey);
+            SimpleSearchTree<K, V> leaf = new SimpleSearchTree<>(insertionKey, insertionValue);
+
+            if (left.comparesLeft(insertionKey)) {
+                parent.left = leaf;
+                parent.right = left;
+            } else {
+                parent.left = left;
+                parent.right = leaf;
+            }
+
+            left = parent;
+
+            return;
+        }
+
+        left.insert(insertionKey, insertionValue);
     }
 
     @Override
