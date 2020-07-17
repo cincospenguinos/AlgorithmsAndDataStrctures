@@ -53,36 +53,38 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
                 key = insertionKey;
                 return;
             }
+
+            if (!comparesLeft(insertionKey) && right == null) {
+                right = new SimpleSearchTree<>(insertionKey, insertionValue);
+                return;
+            }
         }
 
         if (comparesLeft(insertionKey)) {
-            insertLeft(insertionKey, insertionValue);
-        } else if (right == null) {
-            right = new SimpleSearchTree<>(insertionKey, insertionValue);
+            insertOnto(left, insertionKey, insertionValue);
+        } else {
+            insertOnto(right, insertionKey, insertionValue);
         }
     }
 
-    private void insertLeft(K insertionKey, V insertionValue) {
-        boolean insertOntoLeafNode = left.isLeaf() && !insertionKey.equals(left.key);
+    private void insertOnto(SimpleSearchTree<K, V> child, K insertionKey, V insertionValue) {
+        boolean insertOntoLeafNode = child.isLeaf() && !insertionKey.equals(child.key);
 
         if (insertOntoLeafNode) {
             SimpleSearchTree<K, V> parent = new SimpleSearchTree<>(insertionKey);
-            SimpleSearchTree<K, V> leaf = new SimpleSearchTree<>(insertionKey, insertionValue);
+            parent.insert(insertionKey, insertionValue);
+            parent.insert(child.key, child.value);
 
-            if (left.comparesLeft(insertionKey)) {
-                parent.left = leaf;
-                parent.right = left;
+            if (child == left) {
+                left = parent;
             } else {
-                parent.left = left;
-                parent.right = leaf;
+                right = parent;
             }
-
-            left = parent;
 
             return;
         }
 
-        left.insert(insertionKey, insertionValue);
+        child.insert(insertionKey, insertionValue);
     }
 
     @Override

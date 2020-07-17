@@ -50,7 +50,6 @@ public class SimpleSearchTreeTest {
         }
     }
 
-    @Ignore
     @Test
     public void insert_worksForMultipleRightItems() {
         SearchTree<Integer, Integer> tree = new SimpleSearchTree<>();
