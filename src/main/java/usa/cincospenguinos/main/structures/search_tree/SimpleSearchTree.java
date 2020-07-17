@@ -55,9 +55,7 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
                 SimpleSearchTree<K, V> parent = new SimpleSearchTree<>(insertionKey);
                 SimpleSearchTree<K, V> leaf = new SimpleSearchTree<>(insertionKey, insertionValue);
 
-                int childComparison = insertionKey.compareTo(left.key);
-
-                if (childComparison < 0) {
+                if (left.comparesLeft(insertionKey)) {
                     parent.left = leaf;
                     parent.right = left;
                 } else {
