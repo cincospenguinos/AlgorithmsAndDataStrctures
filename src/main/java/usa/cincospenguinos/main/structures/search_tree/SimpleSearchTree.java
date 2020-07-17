@@ -15,17 +15,17 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
 
     @Override
     public V find(K queryKey) {
-        if (isLeaf() && queryKey.compareTo(key) == 0) {
-            return value;
+        if (isLeaf()) {
+            return key.equals(queryKey) ? value : null;
         }
 
-        if (left == null) {
+        if (key == null) {
             return null;
         }
 
-        int keyComparison = key.compareTo(queryKey);
+        int comparison = key.compareTo(queryKey);
 
-        if (keyComparison <= 0) {
+        if (comparison <= 0) {
             return left.find(queryKey);
         }
 
@@ -37,16 +37,15 @@ public class SimpleSearchTree<K extends Comparable<K>, V> implements SearchTree<
     }
 
     @Override
-    public void insert(K _key, V _value)  {
-        if (left == null) {
-            left = new SimpleSearchTree<>(_key, _value);
-            key = _key;
-            return;
+    public void insert(K insertionKey, V insertionValue)  {
+        if (!isLeaf() && left == null) {
+            left = new SimpleSearchTree<>(insertionKey, insertionValue);
+            key = insertionKey;
         }
     }
 
     @Override
-    public void delete(K key) {
+    public void delete(K deletionKey) {
 
     }
 }
